@@ -11,7 +11,7 @@ app.use(cors()) // allow cross-origin resource sharing
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-
+app.use(express.static('public'))
 // connect to database
 mongoose
   .connect(`${process.env.DB_CONNECTION_STRING}`)
@@ -79,4 +79,17 @@ app.post('/messages/save', async (req, res) => {
 })
 
 // export the express app we created to make it available to other modules
+
+app.get ('/about-us', (req,res) =>{
+  res.json ({
+    title: 'About Us', 
+    paragraphs: [
+      'Im a CS major studying away in New York from Abu Dhabi.'
+    ],
+     imageUrl: 'http://localhost:5002/me.jpg',
+  })
+}
+
+
+)
 module.exports = app // CommonJS export style!
